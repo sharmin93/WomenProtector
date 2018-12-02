@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "750353029736",
+    "firebase_url": "https://womenprotector-1527520199183.firebaseio.com",
+    "project_id": "womenprotector-1527520199183",
+    "storage_bucket": "womenprotector-1527520199183.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:750353029736:android:9ba418ad06906b26",
+        "android_client_info": {
+          "package_name": "com.oweshie.womenprotector.womenprotectorapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "750353029736-fgs3005c9vck4aovr8tchksgphpabj4b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.oweshie.womenprotector.womenprotectorapp",
+            "certificate_hash": "3411043020ac20379dc1c818c84082da1966479b"
+          }
+        },
+        {
+          "client_id": "750353029736-ch63tub99pa6fpt5lgrj0a708541cm0a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBc1DUGcnuAhl_DuH9dR9Yuhw9qF8piL8w"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "750353029736-ch63tub99pa6fpt5lgrj0a708541cm0a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

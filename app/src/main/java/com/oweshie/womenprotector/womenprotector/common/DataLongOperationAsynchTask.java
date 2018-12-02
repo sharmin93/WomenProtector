@@ -2,6 +2,8 @@ package com.oweshie.womenprotector.womenprotector.common;
 
 import android.os.AsyncTask;
 
+import com.oweshie.womenprotector.womenprotector.RunTimeDataStore;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -13,9 +15,7 @@ import java.net.URL;
 
 import javax.net.ssl.HttpsURLConnection;
 
-/**
- * Created by Sourav on 29-05-18.
- */
+
 
 public class DataLongOperationAsynchTask extends AsyncTask<String, Void, String[]> {
     @Override
@@ -39,18 +39,9 @@ public class DataLongOperationAsynchTask extends AsyncTask<String, Void, String[
     protected void onPostExecute(String... result) {
         try {
             JSONObject jsonObject = new JSONObject(result[0]);
-            String address = ((JSONArray)jsonObject.get("results")).getJSONObject(0)
-                    .getJSONObject("address_components").getString("formatted_address");
-            /*double lng = ((JSONArray)jsonObject.get("results")).getJSONObject(0)
-                    .getJSONObject("geometry").getJSONObject("location")
-                    .getDouble("lng");
-
-            double lat = ((JSONArray)jsonObject.get("results")).getJSONObject(0)
-                    .getJSONObject("geometry").getJSONObject("location")
-                    .getDouble("lat");*/
-            System.out.println("yes");
-
-
+            String address ="jj"; //((JSONArray)jsonObject.get("results")).getJSONObject(0).getString("formatted_address");
+            CommonTask.savePreference(RunTimeDataStore.getInstance().getContext(),CommonContant.CURRENT_LOCATION_NAME,address);
+            CommonTask.savePreference(RunTimeDataStore.getInstance().getContext(),CommonContant.CURRENT_TIME, String.valueOf(System.currentTimeMillis()));
         } catch (JSONException e) {
             e.printStackTrace();
         }

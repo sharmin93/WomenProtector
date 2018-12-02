@@ -5,11 +5,12 @@ import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 
+import com.google.firebase.database.FirebaseDatabase;
 import com.oweshie.womenprotector.womenprotector.common.CommonContant;
 import com.oweshie.womenprotector.womenprotector.common.CommonTask;
 import com.oweshie.womenprotector.womenprotector.common.IDialogClick;
@@ -26,7 +27,7 @@ public class SplashScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
         initDataStore();
-        checkLocationPermission();
+        requestSmsPermission();
     }
 
     private void gotoMainActivity() {
@@ -36,6 +37,7 @@ public class SplashScreen extends AppCompatActivity {
         startService(intent);
         Intent gotoMain= new Intent(this,MainActivity.class);
         startActivity(gotoMain);
+        finish();
     }
 
     private void checkLocationPermission() {
@@ -51,12 +53,36 @@ public class SplashScreen extends AppCompatActivity {
         }
 
     }
+
+
+    private void requestSmsPermission() {
+
+        // check permission is given
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
+            // request permission (see result in onRequestPermissionsResult() method)
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.SEND_SMS},
+                    CommonContant.SEND_SMS_REQUEST);
+        } else {
+            checkLocationPermission();
+        }
+    }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
         switch (requestCode) {
             case CommonContant.LOCATION_REQUEST: {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     checkBluetooth();
+                } else {
+                    System.exit(0);
+                }
+                return;
+            }
+            case CommonContant.SEND_SMS_REQUEST: {
+
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    checkLocationPermission();
                 } else {
                     System.exit(0);
                 }
@@ -95,6 +121,10 @@ public class SplashScreen extends AppCompatActivity {
             CommonTask.showDailog(this,"Alert","Your Phone does not support Bluetoth",iDialogClick, "Ok", null);
         }
         RunTimeDataStore.getInstance().setContext(getApplicationContext());
+        RunTimeDataStore.getInstance().setDatabase(FirebaseDatabase.getInstance());
+        RunTimeDataStore.getInstance().setMyReadReference(RunTimeDataStore.getInstance().getDatabase().getReference());
+
+
        // TODO all data store
     }
 
@@ -131,6 +161,5 @@ public class SplashScreen extends AppCompatActivity {
             }
         }
     }
-
 
 }

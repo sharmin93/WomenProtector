@@ -13,9 +13,6 @@ import io.nlopez.smartlocation.OnLocationUpdatedListener;
 import io.nlopez.smartlocation.OnReverseGeocodingListener;
 import io.nlopez.smartlocation.SmartLocation;
 
-/**
- * Created by Sourav on 24-05-18.
- */
 
 public class MyLocationManager {
     private Context context;

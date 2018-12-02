@@ -21,15 +21,12 @@ import java.util.Locale;
 
 import static android.app.Service.START_STICKY;
 
-/**
- * Created by Sourav on 28-05-18.
- */
 
 public class MyService extends Service {
-    private static final String TAG = "BOOMBOOMTESTGPS";
+    private static final String TAG = "GPS";
     private LocationManager mLocationManager = null;
-    private static final int LOCATION_INTERVAL = 1000;
-    private static final float LOCATION_DISTANCE = 10000;
+    private static final int LOCATION_INTERVAL = 10;
+    private static final float LOCATION_DISTANCE = 1;
 
     private class LocationListener implements android.location.LocationListener {
         Location mLastLocation;
@@ -43,9 +40,11 @@ public class MyService extends Service {
         public void onLocationChanged(Location location) {
             Log.e(TAG, "onLocationChanged: " + location);
 
-            Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.ENGLISH);
-            String[] myTaskParams = {String.valueOf(location.getLatitude()), String.valueOf(location.getLongitude())};
-            new DataLongOperationAsynchTask().execute(myTaskParams);
+            CommonTask.savePreference(getApplicationContext(), CommonContant.CURRENT_LATITUDE, String.valueOf(location.getLatitude()));
+            CommonTask.savePreference(getApplicationContext(), CommonContant.CURRENT_LONGITUDE, String.valueOf(location.getLongitude()));
+
+//            String[] myTaskParams = {String.valueOf(location.getLatitude()), String.valueOf(location.getLongitude())};
+//            new DataLongOperationAsynchTask().execute(myTaskParams);
 //                CommonTask.savePreference(getApplicationContext(), CommonContant.CURRENT_LOCATION_NAME, addresses.get(0).getAddressLine(0));
 
 

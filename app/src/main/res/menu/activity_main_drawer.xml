@@ -6,9 +6,9 @@
     <group android:checkableBehavior="single">
 
         <item
-            android:id="@+id/connect_bluetooth"
+            android:id="@+id/select_bluetooth"
             android:icon="@drawable/ic_menu_send"
-            android:title="Connect device" />
+            android:title="Select Bluetooth device" />
         <item
             android:id="@+id/know_my_location"
             android:icon="@drawable/ic_menu_share"
